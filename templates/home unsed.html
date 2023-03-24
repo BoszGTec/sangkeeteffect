@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    /*text*/
+</body>
+<script>
+    let bd = document.body
+    bd.style.background = "linear-gradient(0deg,rgb(243, 154, 154),rgb(255, 238, 141),rgb(179, 234, 153),rgb(146, 222, 237),rgb(141, 164, 240),rgb(172, 132, 218))"
+    let iii = 10
+    let looprainbow = setInterval(
+      ()=>{
+        iii += 1
+        bd.style.background = "linear-gradient("+iii+"deg,rgb(243, 154, 154),rgb(255, 238, 141),rgb(179, 234, 153),rgb(146, 222, 237),rgb(141, 164, 240),rgb(172, 132, 218))"
+        //bd.style.background = "repeating-radial-gradient("+iii+"px,rgb(243, 154, 154),rgb(255, 238, 141),rgb(179, 234, 153),rgb(146, 222, 237),rgb(141, 164, 240),rgb(172, 132, 218))"
+      },500
+    )
+    const soundDataJson = /*soundDataJson*/;
+    const result = /*result*/;
+    const keyword = "/*keyword*/";
+    function showResult(){
+      const soundDataJson = /*soundDataJson*/;
+      const result = /*result*/;
+      const keyword = "/*keyword*/";
+      document.body.innerHTML = ""
+      if(result.length===0){
+        document.body.innerHTML = "Not Found This Keyword"
+      }
+      for(let i=0;i<=result.length;i++){
+        document.body.innerHTML += '<div>Name : '+soundDataJson[result[i]]["name"]+'</div>';
+        document.body.innerHTML += '<div>Des : '+soundDataJson[result[i]]["description"]+'</div>';
+        document.body.innerHTML += '<audio controls src="stream/sound/'+result[i]+'"></audio>';
+      }
+    }
+    function showResult2(){
+      document.body.innerHTML = ""
+      if(result.length===0){
+        document.body.innerHTML = "Not Found This Keyword"
+      }
+      for(let i=0;i<=result.length;i++){
+        document.body.innerHTML += '<div>Name : '+soundDataJson[result[i]]["Sound Name"]+'</div>';
+        document.body.innerHTML += '<div>Des : '+soundDataJson[result[i]]["Description"]+'</div>';
+        document.body.innerHTML += '<audio controls src="stream/sound/'+soundDataJson[result[i]]["Sound File"]+'"></audio>';
+      }
+    }
+    function showMessage(){
+      const
+    }
+  </script>
+  <script>
+    /*call*/
+  </script>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Google Font + Icon-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link 
+          href="https://fonts.googleapis.com/css2?family=Kanit&family=Noto+Sans+Thai&family=Prompt&family=Sarabun&family=Source+Code+Pro&display=swap" 
+          rel="stylesheet"
+    />
+    <!-- Bulma css-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link
+      href="https://cdn.discordapp.com/attachments/1036704883056848917/1044601705104412682/suneditor.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.discordapp.com/attachments/1036704903613132950/1044601124960870460/suneditor.min.js"></script>
+    <script src="https://cdn.discordapp.com/attachments/1036704903613132950/1044602209280725023/en.js"></script>
+    <script src="https://cdn.discordapp.com/attachments/1036704903613132950/1048524749845823518/th.js"></script>
+    <!-- https://github.com/codemirror/CodeMirror -->
+    <!-- codeMirror (^5.0.0) -->
+    <!-- Use version 5.x.x -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.49.0/lib/codemirror.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.49.0/lib/codemirror.min.js"></script>
+    <!-- Animate css -->
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+    <style>
+      *,input,button,::-webkit-file-upload-button{
+        font-family: 'Noto Sans Thai', sans-serif;
+      }
+      ::-webkit-file-upload-button{
+        display: none;
+      }
+      html{
+        appearance: none;
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+      }
+      form{
+        background: #fff;
+        padding: 50px;
+        margin-left:10vw;
+        margin-right:10vw;
+        width:80vw;
+        border:solid 0.1px rgb(240, 239, 239);
+      }
+      body{
+        box-sizing: border-box;
+        height: 100vh;
+        overflow-y: scroll;
+      }
+      @keyframes loop_1_rotate {
+        from{transform: rotate(0deg);}
+        to{transform: rotate(360deg);}
+      }
+      img:hover{
+        animation-name: loop_1_rotate;
+        animation-iteration-count: infinite;
+        animation-duration: 4s;
+        animation-timing-function: linear;
+      }
+      @media screen and (max-width:700px) {
+        form{
+          width: 98vw;
+          margin: 1vw;
+        }
+      }
+    </style>
+</head>
+<body>
+  <div id="bt-ct" style="text-align: right;">
+    <a href="/" class="button is-link is-light animate__animated animate__headShake ">
+      <span class="material-symbols-outlined">
+        home
+      </span>
+      Home
+    </a>
+    <a href="/add_sound" class="button is-link is-light animate__animated animate__headShake ">
+      <span class="material-symbols-outlined">
+        add
+      </span>
+      Add Sound
+    </a>
+  </div>
+  <center>
+    <h1 class="title is-1 animate__animated animate__fadeInDown">
+      <img class="animate__animated animate__rotateIn" style="margin:-60px;" width="400px" src="https://media.discordapp.net/attachments/1036704934432886876/1050475886517960704/1.png?width=1036&height=1036" />
+      <br/>
+      Sangkeet Add Sound
+      <br/>
+      <hr/>
+      <br/>
+    </h1>
+  </center>
+    <form class="box animate__animated animate__jackInTheBox" method="post" enctype="multipart/form-data" >
+        <h1 class="title is-1">Add Sound</h1>
+        <label hidden>Id</label>
+        <input name="_id" class="input" type="hidden" readonly value="/*id*/" required />
+        <label>Title<font color="#f14668">*</font></label>
+        <input class="input" name="soundName" required />
+        <label>File (.mp3 only)<font color="#f14668">*</font></label>
+        <input class="input" name="soundFile" type="file" accept=".mp3" required />
+        <label>Description</label>
+        <textarea id="edit-box" class="textarea" name="description" required></textarea>
+        <br/>
+        <input class="button is-primary" onclick="editor.save()" type="submit" />
+    </form>
+    <script>
+        const editor = SUNEDITOR.create(document.getElementById("edit-box"), {
+                      lang: SUNEDITOR_LANG["th"],
+                      width: "100%",
+                      height: "fit-content",
+                      minHeight: "300px",
+                      codeMirror: CodeMirror,
+                      font: [
+                        "Arial",
+                        "Verdana",
+                        "Tahoma",
+                        "Trebuchet MS",
+                        "Times New Roman",
+                        "Georgia",
+                        "Garamond",
+                        "Courier New",
+                        "Brush Script MT",
+                        "Noto Sans Thai",
+                        "Prompt",
+                        "Sarabun"
+                    ],
+                      buttonList: [
+                        ["undo", "redo"],
+                        ["font", "fontSize", "formatBlock"],
+                        [
+                          "bold",
+                          "underline",
+                          "italic",
+                          "strike",
+                          "subscript",
+                          "superscript",
+                        ],
+                        ["fontColor", "hiliteColor", "textStyle"],
+                        ["removeFormat"],
+                        ["outdent", "indent"],
+                        ["align", "horizontalRule", "list", "lineHeight"],
+                        ['fullScreen', 'showBlocks', 'codeView'],
+                        ['preview', 'print'],
+                        ["save"],
+                        "/",
+                      ],
+                    });
+                    editor.onInput = () => {
+                      editor.save();
+                    };
+                    editor.onChange = () => {
+                      editor.save();
+                    };
+    </script>
+    <script>
+      function showAdminBt(){
+        document.getElementById("bt-ct").innerHTML += "<a class='button is-success is-light animate__animated animate__headShake ' href='/admin' >\
+              <span class='material-symbols-outlined'>\
+                  admin_panel_settings\
+              </span>\
+              Admin\
+            </a>";
+      }
+    </script>
+    <script>
+      /*call*/
+    </script>
+</body>
+</html>

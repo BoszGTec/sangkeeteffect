@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link 
+          href="https://fonts.googleapis.com/css2?family=Kanit&family=Noto+Sans+Thai&family=Prompt&family=Sarabun&family=Source+Code+Pro&display=swap" 
+          rel="stylesheet"
+    />
+    <!-- Bulma css-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+      *{
+            font-family: 'Noto Sans Thai';
+        }
+        body{
+          height: 100vh;
+          overflow-x: hidden;
+        }
+        .content{
+          margin: 10vw;
+          margin-top: 10vh;
+          margin-bottom: 10vh;
+          width: 80vw;
+          height: 80vh;
+          padding: 2vh;
+        }
+        .des{
+          border: solid 1px;
+        }
+        @media screen and (max-width:700px) {
+        .content{
+          width: 96vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+        }
+      }
+    </style>
+</head>
+<body>
+  <div id="bt-ct" style="text-align: right;">
+    <a href="/" class="button is-link is-light animate__animated animate__headShake ">
+      <span class="material-symbols-outlined">
+        home
+      </span>
+      Home
+    </a>
+    <a href="/add_sound" class="button is-link is-light animate__animated animate__headShake ">
+      <span class="material-symbols-outlined">
+        add
+      </span>
+      Add Sound
+    </a>
+  </div>
+    <center>
+      <img class="animate__animated animate__rotateIn" style="margin:-60px;" width="400px" src="https://media.discordapp.net/attachments/1036704934432886876/1050475886517960704/1.png?width=1036&height=1036" />
+
+    </center>
+    <hr/>
+    <div class="content box button">
+      <img width="110px" src="https://cdn-icons-png.flaticon.com/512/461/461238.png"/>
+      <h1 class="title is-1 is-desktop">/*soundName*/</h1>
+      <audio controls src="/*link*/"></audio>
+      <h3 style="text-align: left;">Description</h3>
+      <div class="box">
+        /*description*/
+      </div>
+      <a href="/*link*/" download="/*soundName*/" class="button is-primary">
+        <span class="material-symbols-outlined">
+          download
+        </span>
+        Download
+      </a>
+    </div>
+</body>
+<script>
+  function showAdminBt(){
+    document.getElementById("bt-ct").innerHTML += "<a class='button is-success is-light animate__animated animate__headShake ' href='/admin' >\
+              <span class='material-symbols-outlined'>\
+                  admin_panel_settings\
+              </span>\
+              Admin\
+            </a>";
+  }
+</script>
+<script>
+  /*call*/
+</script>
+</html>

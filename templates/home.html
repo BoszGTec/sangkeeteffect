@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kanit&family=Noto+Sans+Thai&family=Prompt&family=Sarabun&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <title>SangKheetEffect</title>
+    <style>
+        *{
+            font-family: 'Noto Sans Thai';
+        }
+        input{
+            font-family: 'Noto Sans Thai';
+        }
+        .bct-box{
+            display: flex;
+            justify-content: center;
+            justify-self: center;
+            justify-items: center;
+        }
+        .column,.columns{
+            margin: 10px;
+        }
+        .column{
+            height: 200px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="bt-ct" style="text-align: right;">
+        <a href="/" class="button is-link is-light animate__animated animate__headShake ">
+            <span class="material-symbols-outlined">
+                home
+            </span>
+            Home
+        </a>
+        <a href="/add_sound" class="button is-link is-light animate__animated animate__headShake ">
+            <span class="material-symbols-outlined">
+                add
+            </span>
+            Add Sound
+        </a>
+    </div>
+    <center>
+        <img class="animate__animated animate__rotateIn" style="margin:-60px;" width="400px" src="https://media.discordapp.net/attachments/1036704934432886876/1050475886517960704/1.png?width=1036&height=1036" />
+        
+        <form action="/search">
+            <div style="width: fit-content;" class="field has-addons">
+                <p class="control">
+                  <input class="input is-link" type="search" placeholder="keyword" style="width: 50vw;" name="keyword" />
+                </p>
+                <p class="control">
+                  <input class="button is-link" type="submit" value="ค้นหา" />
+                </p>
+              </div>
+        </form>
+    </center>
+    <hr/>
+    <noscript>
+        <center>
+            <h2 class="title is-2">กรุณาเปิดใช้งาน JavaScript</h2>
+        </center>
+    </noscript>
+    <div class="bct-box">
+        <div id="content">
+            
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <center hidden>
+        <input class="button is-primary" type="button" value="More"/>
+    </center>
+    <br/>
+    <br/>
+    <div hidden id="au"></div>
+    <div style="position:fixed;bottom: 10px;right: 10px;">
+        <a onclick="alert('ยังไม่มีBuymeCoffeeเอาเงินส่งไปรษณีย์มาแทนละกัน')">
+            <img class="animate__animated animate__rubberBand" width="200px" src="https://cdn.discordapp.com/attachments/1036704934432886876/1050280715784310864/bmc-button.svg"/>
+        </a>
+    </div>
+    <div id="disk"></div>
+</body>
+<script>
+    let before = ""
+    function togglePlay(xx,path){
+        let au = document.getElementById("au")
+        if(before == xx){
+        au.innerHTML = ""
+        document.getElementById(xx).style.border = ""
+        before = ""
+        }
+        au.innerHTML = "<audio src='"+path+"' id='au"+xx+"'></audio>"
+        document.getElementById("au"+xx).play()
+        if(before != ""){
+            document.getElementById(before).style.border = "";
+        }
+        document.getElementById(xx).style.border = "solid 2px"
+        let checkAuStillPlay = setInterval(
+          ()=>{
+            if(document.getElementById("au"+xx).paused){
+              document.getElementById(xx).style.border = "";
+              clearInterval(checkAuStillPlay)
+            }
+          },1000
+        )
+        before = xx
+    }
+    
+</script>
+<script>
+    function showResult(){
+        const soundDataJson = /*soundDataJson*/;
+        const result = /*result*/;
+        const keyword = "/*keyword*/";
+        const ct = document.getElementById("content");
+        if(result.length===0 && keyword!=="\/*keyword*\/"){
+            ct.innerHTML = "Not Found This Keyword : "+keyword
+            return 0
+        }
+        else if(result.length===0){
+            ct.innerHTML = "<h3 class='title is-3'>Not Found Any Sound</h3>"
+            ct.innerHTML += '<center><a href="/add_sound" class="button is-link is-light">\
+                                <span class="material-symbols-outlined">\
+                                    add\
+                                </span>\
+                                Add Sound\
+                            </a></center>'
+            return 0
+        }
+        let xx = 0;
+        let before = 0;
+        const ii = parseInt(result.length/4) == 0 ? 1 : parseInt(result.length/4);
+        console.log(ii)
+        for(let i=0;i<=ii ;i++){
+        ct_in_ct = ""
+        console.log(i)
+            for(let x=0;x<4;x++){
+                if(xx >= result.length){
+                    break
+                }
+                let s_name = soundDataJson[result[xx]]['name'];
+                ct_in_ct += '<div class="column button" id="'+(result[xx])+'" onclick="togglePlay(\''+result[xx]+'\',\'/stream/sound/'+result[xx]+'\')" >'
+                ct_in_ct += '<img width="110px" src="https://cdn-icons-png.flaticon.com/512/461/461238.png"/>'
+                ct_in_ct += '<h3>'
+                ct_in_ct += s_name
+                ct_in_ct+='</h3><a href="info/'+result[xx]+'"><span class="material-symbols-outlined">info</span></a>\
+                    </div>'
+                xx++
+            }
+            ct.innerHTML += "<div class='columns'>"+ct_in_ct+"</div>"
+        }
+    }
+</script>
+<script>
+    function showResult2(){
+        const soundDataJson = /*soundDataJson*/;
+        const result = /*result*/;
+        const keyword = "/*keyword*/";
+        const ct = document.getElementById("content");
+        if(result.length===0 && keyword!=="\/*keyword*\/"){
+            ct.innerHTML = "Not Found This Keyword : "+keyword
+            return 0
+        }
+        else if(result.length===0){
+            ct.innerHTML = "<h3 class='title is-3'>Not Found Any Sound</h3>"
+            ct.innerHTML += '<center><a href="/add_sound" class="button is-link is-light">\
+                                <span class="material-symbols-outlined">\
+                                    add\
+                                </span>\
+                                Add Sound\
+                            </a></center>'
+            return 0
+        }
+        let xx = 0;
+        let before = 0;
+        const ii = parseInt(result.length/4) == 0 ? 1 : parseInt(result.length/4);
+        console.log(ii)
+        for(let i=0;i<=ii ;i++){
+        ct_in_ct = ""
+        console.log(i)
+            for(let x=0;x<4;x++){
+                if(xx >= result.length){
+                    break
+                }
+                let s_name = soundDataJson[result[xx]]['Sound Name'];
+                ct_in_ct += '<div class="column button" id="'+(result[xx])+'" onclick="togglePlay(\''+result[xx]+'\',\''
+                +'https://drive.google.com/uc?export=download&id='+
+                soundDataJson[result[xx]]['Sound File'].split("?id=")[1]
+                +'\')">\
+                    <img width="110px" src="https://cdn-icons-png.flaticon.com/512/461/461238.png"/>\
+                    <h3>'
+                ct_in_ct+=s_name
+                ct_in_ct+='</h3><a href="info/'+result[xx]+'"><span class="material-symbols-outlined">info</span></a>\
+                    </div>'
+                xx++
+            }
+            ct.innerHTML += "<div class='columns'>"+ct_in_ct+"</div>"
+        }
+    }
+</script>
+<script>
+    function showMessage(){
+        const keyword = "/*keyword*/";
+        const ct = document.getElementById("content");
+        ct.innerHTML = keyword;
+    }
+    function showAdminBt(){
+        document.getElementById("bt-ct").innerHTML += "<a class='button is-success is-light animate__animated animate__headShake ' href='/admin' >\
+                <span class='material-symbols-outlined'>\
+                    admin_panel_settings\
+                </span>\
+                Admin\
+            </a>";
+    }
+</script>
+<script>
+    /*call*/
+</script>
+</html>
